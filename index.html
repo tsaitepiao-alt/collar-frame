@@ -161,11 +161,11 @@ function load(name, url, offset){
   }, undefined, e => { console.error('GLB fail', name, e); document.getElementById('stat').textContent = '載入失敗：'+name; });
 }
 
-load('frame_a', 'assets/frame_a.glb');
-load('frame_b', 'assets/frame_b.glb');
-load('module_a', 'assets/module_a.glb');
-load('clasp_male', 'assets/clasp_male.glb', [0, -70, 0]);
-load('clasp_female', 'assets/clasp_female.glb', [0, -48, 0]);
+load('frame_a', 'assets/frame_a.glb?v=3');
+load('frame_b', 'assets/frame_b.glb?v=3');
+load('module_a', 'assets/module_a.glb?v=3');
+load('clasp_male', 'assets/clasp_male.glb?v=3', [0, -70, 0]);
+load('clasp_female', 'assets/clasp_female.glb?v=3', [0, -48, 0]);
 
 function setStat(){
   const n = ['frame_a','frame_b','module_a','clasp_male','clasp_female'].filter(k => groups[k]).length;
