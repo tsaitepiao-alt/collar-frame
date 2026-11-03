@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>嘉蘭頸圈框 3D｜磁吸 + 機械擋塊</title>
+<style>
+  :root{--bg:#0f1116;--card:#161a21;--line:#242a33;--acc:#e8734a;--lime:#cbf24c;--tx:#e6e9ef;--dim:#8b93a1;--mint:#4be3a8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 -apple-system,"PingFang TC",system-ui,sans-serif}
+  a{color:var(--lime);text-decoration:none}
+  .wrap{max-width:1060px;margin:0 auto;padding:26px 18px 70px}
+  h1{font-size:25px;margin:0 0 4px}
+  .sub{color:var(--dim);margin:0 0 18px;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 16px}
+  h2{font-size:16px;margin:0 0 10px;color:var(--acc)}
+  #view{width:100%;height:min(60vh,500px);background:#0b0d11;border:1px solid var(--line);border-radius:10px;touch-action:none;display:block}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  button{background:#1e242e;color:var(--tx);border:1px solid var(--line);border-radius:9px;padding:9px 13px;font-size:14px;cursor:pointer}
+  button:hover{border-color:var(--acc)} button.on{border-color:var(--lime);color:var(--lime)}
+  button:active{transform:translateY(1px)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  td,th{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+  th{color:var(--dim);font-weight:500}
+  .ok{color:var(--lime)} .bad{color:#e86a6a}
+  .dl{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .dl a{border:1px solid var(--line);border-radius:9px;padding:7px 12px;font-size:13px}
+  .dl a:hover{border-color:var(--acc)}
+  .hint{color:var(--dim);font-size:13px;margin-top:8px}
+  .badge{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--dim);margin-left:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>嘉蘭一號／二號 頸圈框</h1>
+  <p class="sub">磁吸負責對位與手感，機械擋塊負責受力。模組 63×39×15 / 56×44×17.8，織帶 20×2.5。拖曳可旋轉。</p>
+
+  <div class="card">
+    <h2>3D 檢視 <span class="badge" id="stat">載入中…</span></h2>
+    <canvas id="view"></canvas>
+    <div class="row">
+      <button id="mA" class="on">嘉蘭一號框</button>
+      <button id="mB">嘉蘭二號框</button>
+      <button id="mMod">模組（示意）</button>
+      <button id="mClasp">扣件 公＋母</button>
+      <button id="mWire">線框</button>
+      <button id="mReset">重置視角</button>
+    </div>
+    <div class="hint">拖曳旋轉 ・ 滾輪／雙指縮放 ・ 右鍵平移。模組是量體示意，不是可製造件。</div>
+  </div>
+
+  <div class="card">
+    <h2>機構分工</h2>
+    <table>
+      <tr><th>受力方向</th><th>誰負責</th><th>做法</th></tr>
+      <tr><td>側向／旋轉</td><td class="ok">機械擋</td><td>6 mm 框壁四面夾住，單邊 0.35 餘隙</td></tr>
+      <tr><td>往下</td><td class="ok">機械擋</td><td>腔底 2 mm 托台，模組坐上去</td></tr>
+      <tr><td>往外脫</td><td>磁吸</td><td>N35 Ø6×2 ×2，只做貼合與手感</td></tr>
+      <tr><td>扣件拉力</td><td class="ok">機械擋</td><td>勾子跨過母片上緣＋擋牆，磁鐵不承力</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>驗證（布林量體，不看圖）</h2>
+    <table>
+      <tr><th>項目</th><th>結果</th></tr>
+      <tr><td>模組 ∩ 框</td><td class="ok">0.000000 mm³</td></tr>
+      <tr><td>磁鐵窩淨空／前方肉厚</td><td class="ok">0 ／ 19.8 mm³（期望 19.8）</td></tr>
+      <tr><td>底部托台</td><td class="ok">158 / 140 mm³</td></tr>
+      <tr><td>織帶孔（20×2.5 過得去、沒咬進框壁）</td><td class="ok">0 mm³</td></tr>
+      <tr><td>公母片閉合 ∩</td><td class="ok">0 mm³</td></tr>
+      <tr><td>對照組（框壁／母片本體）</td><td class="ok">30.8／11.5 mm³，證明不是假通過</td></tr>
+      <tr><td>磁吸力／插拔力</td><td class="bad">未實測（需彈簧秤）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>下載</h2>
+    <div class="dl">
+      <a href="downloads/frame_a.step" download>frame_a.step</a>
+      <a href="downloads/frame_b.step" download>frame_b.step</a>
+      <a href="downloads/clasp_male.step" download>clasp_male.step</a>
+      <a href="downloads/clasp_female.step" download>clasp_female.step</a>
+      <a href="downloads/frame_a.stl" download>frame_a.stl</a>
+      <a href="downloads/frame_b.stl" download>frame_b.stl</a>
+      <a href="downloads/assembly.md" download>組裝說明</a>
+      <a href="downloads/tolerance.md" download>公差表</a>
+    </div>
+    <div class="hint">STEP 給打樣／改參數；STL 直接切片。SLS PA12 首選（卡扣與框耳韌性）。</div>
+  </div>
+</div>
+
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const cv = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({canvas: cv, antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b0d11);
+const cam = new THREE.PerspectiveCamera(40, 1, 0.5, 5000);
+const ctr = new OrbitControls(cam, cv); ctr.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x223344, 1.2));
+const d1 = new THREE.DirectionalLight(0xffffff, 1.6); d1.position.set(120, 200, 160); scene.add(d1);
+const d2 = new THREE.DirectionalLight(0x88aaff, .55); d2.position.set(-150, -80, -120); scene.add(d2);
+
+const MAT = {
+  frame: new THREE.MeshStandardMaterial({color: 0x9fb3c8, metalness: .15, roughness: .6}),
+  module: new THREE.MeshStandardMaterial({color: 0x1d2530, metalness: .35, roughness: .35}),
+  clasp: new THREE.MeshStandardMaterial({color: 0xe8734a, metalness: .2, roughness: .5}),
+  wire: new THREE.MeshBasicMaterial({color: 0xcbf24c, wireframe: true}),
+};
+const groups = {};   // name -> THREE.Group
+window.__g = groups;   // debug: 檢查載入狀況
+let wireOn = false, curFrame = 'A';
+
+function fit(){
+  // 只框「框體＋模組」；扣件放在旁邊，算進來會把主體推出畫面
+  const box = new THREE.Box3();
+  ['frame_a','frame_b','module_a'].forEach(k => {
+    const g = groups[k]; if (g && g.visible) box.expandByObject(g);
+  });
+  if (box.isEmpty()) return;
+  const c = box.getCenter(new THREE.Vector3());
+  const s = box.getSize(new THREE.Vector3()).length();
+  ctr.target.copy(c);
+  cam.position.set(c.x - s*.55, c.y + s*.45, c.z + s*.75);
+  cam.near = s/600; cam.far = s*20; cam.updateProjectionMatrix(); ctr.update();
+}
+function applyMat(){
+  Object.values(groups).forEach(g => g.traverse(o => {
+    if (!o.isMesh) return;
+    o.material = wireOn ? MAT.wire : (o.userData.mat || MAT.frame);
+  }));
+}
+function load(name, url, offset){
+  new GLTFLoader().load(url, g => {
+    const grp = new THREE.Group();
+    grp.add(g.scene);
+    // cadgen 匯出的 GLB 是「公尺」；本頁座標用 mm，所以要乘 1000
+    grp.scale.setScalar(1000);
+    grp.position.set(offset?.[0]||0, offset?.[1]||0, offset?.[2]||0);
+    const m = MAT[name.startsWith('module') ? 'module' : (name.startsWith('clasp') ? 'clasp' : 'frame')];
+    grp.traverse(o => { if (o.isMesh) o.userData.mat = m; });
+    scene.add(grp); groups[name] = grp;
+    // 預設只顯示一號框；其餘等按鈕再開（一定要在載入回呼裡設，載入前 groups 是空的）
+    grp.visible = (name === 'frame_a');
+    applyMat();
+    setStat();
+    if (name === 'frame_a') fit();
+  }, undefined, e => { console.error('GLB fail', name, e); document.getElementById('stat').textContent = '載入失敗：'+name; });
+}
+
+load('frame_a', 'assets/frame_a.glb');
+load('frame_b', 'assets/frame_b.glb');
+load('module_a', 'assets/module_a.glb');
+load('clasp_male', 'assets/clasp_male.glb', [0, -70, 0]);
+load('clasp_female', 'assets/clasp_female.glb', [0, -48, 0]);
+
+function setStat(){
+  const n = ['frame_a','frame_b','module_a','clasp_male','clasp_female'].filter(k => groups[k]).length;
+  document.getElementById('stat').textContent = n ? `${n} 個模型已載入` : '載入中…';
+}
+
+const btn = id => document.getElementById(id);
+btn('mA').onclick = () => { curFrame='A'; groups.frame_a.visible=true; groups.frame_b.visible=false;
+  btn('mA').classList.add('on'); btn('mB').classList.remove('on'); fit(); };
+btn('mB').onclick = () => { curFrame='B'; groups.frame_a.visible=false; groups.frame_b.visible=true;
+  btn('mB').classList.add('on'); btn('mA').classList.remove('on'); fit(); };
+btn('mMod').onclick = e => { if(!groups.module_a) return; groups.module_a.visible = !groups.module_a.visible;
+  e.target.classList.toggle('on', groups.module_a.visible); };
+btn('mClasp').onclick = e => { const v = !(groups.clasp_male && groups.clasp_male.visible);
+  groups.clasp_male && (groups.clasp_male.visible = v);
+  groups.clasp_female && (groups.clasp_female.visible = v);
+  e.target.classList.toggle('on', v); fit(); };
+btn('mWire').onclick = e => { wireOn = !wireOn; e.target.classList.toggle('on', wireOn); applyMat(); };
+btn('mReset').onclick = () => fit();
+
+function resize(){
+  const w = cv.clientWidth, h = cv.clientHeight;
+  renderer.setSize(w, h, false); cam.aspect = w/h; cam.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+resize();
+(function loop(){ requestAnimationFrame(loop); ctr.update(); renderer.render(scene, cam); })();
+</script>
+</body>
+</html>
